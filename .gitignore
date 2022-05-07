@@ -1,0 +1,6 @@
+**/__pycache__
+*/parsons/
+*/parsons_probs/*.yaml
+*/tests/
+*/*ok*
+*/construct_check.py
