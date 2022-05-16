@@ -81,7 +81,7 @@ def hefty_hogs(player_score, opponent_score):
     else:
         while opponent_score > 0:
             player_score = digit_fn(opponent_score % 10)(player_score)
-            opponent_score /= 10
+            opponent_score //= 10
         return player_score % 30
     # END PROBLEM 2
 
@@ -104,7 +104,7 @@ def take_turn(num_rolls, player_score, opponent_score, dice=six_sided, goal=GOAL
     assert max(player_score, opponent_score) < goal, 'The game should be over.'
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
-    
+    return roll_dice(num_rolls, dice) if num_rolls > 0 else hefty_hogs(player_score, opponent_score)
     # END PROBLEM 3
 
 
