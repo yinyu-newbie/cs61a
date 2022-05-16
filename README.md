@@ -7,3 +7,4 @@ website: [CS 61A: Structure and Interpretation of Computer Programs](https://cs6
 ### homework
 - [x] hw02
 ### project
+- [ ] hog
