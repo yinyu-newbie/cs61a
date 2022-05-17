@@ -116,6 +116,10 @@ def hog_pile(player_score, opponent_score):
     """
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    player_one_digit = player_score % 10
+    opponent_one_digit = opponent_score % 10
+
+    return player_one_digit if player_one_digit == opponent_one_digit else 0
     # END PROBLEM 4
 
 
@@ -156,10 +160,24 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     leader = None  # To be used in problem 7
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    while score0 < goal and score1 < goal:
+        if who == 0:
+            num_rolls_0 = strategy0(score0, score1)
+            score0 += take_turn(num_rolls_0, score0, score1, dice, goal)
+            score0 += hog_pile(score0, score1)
+        if who == 1:
+            num_rolls_1 = strategy1(score1, score0)
+            score1 += take_turn(num_rolls_1, score1, score0, dice, goal)
+            score1 += hog_pile(score1, score0)
+
+        who = next_player(who)
     # END PROBLEM 5
     # (note that the indentation for the problem 7 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
+        "*** YOUR CODE HERE ***"
+        leader, message = say(score0, score1, leader)
+        if message != '' and message != None:
+            print(message)
     # END PROBLEM 7
     return score0, score1
 
@@ -194,6 +212,12 @@ def announce_lead_changes(score0, score1, last_leader=None):
     """
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+    if score0 == score1:
+        return None, None
+    elif score0 < score1:
+        return (1, f'Player 1 takes the lead by {score1 - score0}') if last_leader != 1 else (1, None)
+    else:
+        return (0, f'Player 0 takes the lead by {score0 - score1}') if last_leader != 0 else (0, None)
     # END PROBLEM 6
 
 
@@ -260,6 +284,9 @@ def make_averaged(original_function, total_samples=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    def func(*args):
+        return sum([original_function(*args) for _ in range(total_samples)]) / total_samples
+    return func
     # END PROBLEM 8
 
 
@@ -274,6 +301,16 @@ def max_scoring_num_rolls(dice=six_sided, total_samples=1000):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    max_rolls = None
+    max_average_score = -1
+    averaged_dice = make_averaged(roll_dice, total_samples)
+    for roll in range(1, 11):
+        average_score = averaged_dice(roll, dice)
+        if average_score > max_average_score:
+            max_rolls = roll
+            max_average_score = average_score
+    
+    return max_rolls
     # END PROBLEM 9
 
 
@@ -314,7 +351,8 @@ def hefty_hogs_strategy(score, opponent_score, threshold=8, num_rolls=6):
     returns NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 6  # Remove this line once implemented.
+    hefty_score = hefty_hogs(score, opponent_score)
+    return 0 if hefty_score >= threshold else num_rolls
     # END PROBLEM 10
 
 
@@ -324,7 +362,24 @@ def hog_pile_strategy(score, opponent_score, threshold=8, num_rolls=6):
     Otherwise, it returns NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Remove this line once implemented.
+
+    # hefty_rolls = hefty_hogs_strategy(score, opponent_score, threshold, num_rolls)
+
+    # if hefty_rolls == 0:
+    #     return 0
+
+
+    hefty_score = hefty_hogs(score, opponent_score)
+    hog_pile_score = hog_pile(score + hefty_score, opponent_score)
+
+    if hog_pile(score + hefty_score, opponent_score) > 0:
+        return 0
+    if hefty_score + hog_pile_score >= threshold:
+        return 0
+
+    return num_rolls
+    
+
     # END PROBLEM 11
 
 
