@@ -65,8 +65,19 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
-    
+    def helper(n):
+        """help to choose increase or decrease"""
+        if n < 8:
+            return 1
+        elif num_eights(n) != 0 or n % 8 == 0:
+            return -1 * helper(n-1)
+        else:
+            return helper(n - 1)
 
+    if n <= 8:
+        return n
+    else:
+        return pingpong(n - 1) + helper(n - 1)
 
 def get_larger_coin(coin):
     """Returns the next larger coin in order.
@@ -123,4 +134,15 @@ def count_coins(change):
     """
     "*** YOUR CODE HERE ***"
 
+    def helper(change, max_coin=25):
+        """combinations of coins that coins is not more than max_coin
+        """
+        if change == 0:
+            return 1
+        elif change < 0 or max_coin == None:
+            return 0
+        else:
+            return helper(change, get_smaller_coin(max_coin)) + helper(change - max_coin, max_coin)
 
+    return helper(change, 25)
+    
