@@ -14,5 +14,22 @@ def has_subseq(n, seq):
     False
     >>> has_subseq(1343412, 134)
     True
+    >>> has_subseq(100, 10)
+    True
     """
     "*** YOUR CODE HERE ***"
+
+    if n == seq:
+        return True
+
+    right_digit_of_seq = seq % 10
+
+    while n > 0:
+        right_digit_of_n = n % 10
+
+        if right_digit_of_n == right_digit_of_seq:
+            return has_subseq(n//10, seq//10)
+
+        n //= 10
+    
+    return False

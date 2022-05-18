@@ -23,6 +23,12 @@ def num_eights(pos):
     True
     """
     "*** YOUR CODE HERE ***"
+    if pos == 0:
+        return 0
+    elif pos % 10 == 8:
+        return num_eights(pos//10) + 1
+    else:
+        return num_eights(pos//10)
 
 
 def pingpong(n):
@@ -59,6 +65,7 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    
 
 
 def get_larger_coin(coin):
@@ -115,3 +122,5 @@ def count_coins(change):
     True
     """
     "*** YOUR CODE HERE ***"
+
+
