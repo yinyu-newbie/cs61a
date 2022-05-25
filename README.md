@@ -5,10 +5,11 @@ website: [CS 61A: Structure and Interpretation of Computer Programs](https://cs6
 - [x] lab0
 - [x] lab1
 - [x] lab2
+- [x] lab4
 ### homework
 - [x] hw1
 - [x] hw2
-- [ ] hw3
+- [x] hw3
 ### project
 - [x] hog
 
