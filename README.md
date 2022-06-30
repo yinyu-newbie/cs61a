@@ -14,6 +14,7 @@ website: [CS 61A: Structure and Interpretation of Computer Programs](https://cs6
 - [x] hw2
 - [x] hw3
 - [x] hw4
+- [x] hw5
 ### project
 - [x] hog
 - [x] cats
