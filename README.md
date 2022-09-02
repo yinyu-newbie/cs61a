@@ -9,6 +9,7 @@ website: [CS 61A: Structure and Interpretation of Computer Programs](https://cs6
 - [x] lab5
 - [x] lab6
 - [x] lab7
+- [x] lab8
 ### homework
 - [x] hw1
 - [x] hw2
